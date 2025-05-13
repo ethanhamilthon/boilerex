@@ -11,6 +11,7 @@ defmodule Web.Views.Layouts.Main do
           meta charset: "utf-8"
           meta name: "viewport", content: "width=device-width, initial-scale=1.0"
           link rel: "stylesheet", href: "/assets/app.css"
+          link rel: "icon", href: "/favicon.ico", type: "image/png"
 
           title do: @title
         end

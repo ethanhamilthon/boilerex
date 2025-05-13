@@ -3,22 +3,7 @@ defmodule Core.Repo.TaskAgent do
 
   def start_link(_opts) do
     Agent.start_link(
-      fn ->
-        [
-          %{
-            id: 1,
-            name: "task 1"
-          },
-          %{
-            id: 2,
-            name: "task 2"
-          },
-          %{
-            id: 3,
-            name: "task 3"
-          }
-        ]
-      end,
+      fn -> [] end,
       name: __MODULE__
     )
   end

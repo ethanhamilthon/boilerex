@@ -7,7 +7,14 @@ defmodule Core.Services.TaskService do
 
   def add(name) do
     tasks = TaskAgent.list()
-    new_task = %{id: List.last(tasks).id + 1, name: name}
+
+    new_task =
+      if length(tasks) == 0 do
+        %{id: 1, name: name}
+      else
+        %{id: List.last(tasks).id + 1, name: name}
+      end
+
     TaskAgent.add(new_task)
     tasks ++ [new_task]
   end

@@ -8,17 +8,21 @@ defmodule Web.Views.Components.Task do
     temple do
       div id: "all-tasks",
           class: "w-1/2 flex flex-col gap-3 p-6 border border-zinc-800 rounded-xl" do
-        for t <- @tasks do
-          div class:
-                "px-6 w-full py-3 rounded-md border border-zinc-600 flex justify-between items-center" do
-            span class: "", do: t.name
+        if length(@tasks) == 0 do
+          span class: "text-2xl font-medium", do: "🔥 No tasks"
+        else
+          for t <- @tasks do
+            div class:
+                  "px-6 w-full py-3 rounded-md border border-zinc-600 flex justify-between items-center" do
+              span class: "", do: t.name
 
-            button "hx-delete": "/#{t.id}",
-                   "hx-swap": "outerHTML",
-                   "hx-target": "#all-tasks",
-                   "hx-trigger": "click",
-                   class: "cursor-pointer",
-                   do: "❌"
+              button "hx-delete": "/#{t.id}",
+                     "hx-swap": "outerHTML",
+                     "hx-target": "#all-tasks",
+                     "hx-trigger": "click",
+                     class: "cursor-pointer",
+                     do: "❌"
+            end
           end
         end
 
@@ -35,7 +39,10 @@ defmodule Web.Views.Components.Task do
            "hx-target": "#all-tasks" do
         input id: "add-name-input",
               name: "name",
-              class: "w-full px-6 py-3 rounded-md border border-zinc-600 focus:outline-none"
+              type: "text",
+              placeholder: "Title of the task",
+              class:
+                "w-full px-6 py-3 placeholder:text-zinc-700 rounded-md border border-zinc-600 focus:outline-none"
 
         button type: "submit",
                class:

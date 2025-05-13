@@ -16,3 +16,9 @@ mix tailwind.install
 mix tailwind default
 mix run --no-halt
 ```
+
+3. Convert your html templates to elixir code:
+| put your html markups to t.html file first
+```bash
+mix temple.convert t.html
+```

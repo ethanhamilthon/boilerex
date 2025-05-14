@@ -1,27 +1,39 @@
 defmodule Core.Services.TaskService do
-  alias Core.Repo.TaskAgent
+  alias Core.Repo.TaskRepo
 
   def list do
-    TaskAgent.list()
+    TaskRepo.list()
   end
 
   def add(name) do
-    tasks = TaskAgent.list()
+    tasks = TaskRepo.list()
 
     new_task =
       if length(tasks) == 0 do
-        %{id: 1, name: name}
+        %{id: 1, name: name, done: false}
       else
-        %{id: List.last(tasks).id + 1, name: name}
+        %{id: List.last(tasks).id + 1, name: name, done: false}
       end
 
-    TaskAgent.add(new_task)
+    TaskRepo.create(new_task)
     tasks ++ [new_task]
   end
 
   def delete(id) do
     parsed_id = String.to_integer(id)
-    TaskAgent.delete(parsed_id)
-    TaskAgent.list()
+    TaskRepo.delete(parsed_id)
+    TaskRepo.list()
+  end
+
+  def done(id) do
+    parsed_id = String.to_integer(id)
+    TaskRepo.update(parsed_id, true)
+    TaskRepo.list()
+  end
+
+  def recover(id) do
+    parsed_id = String.to_integer(id)
+    TaskRepo.update(parsed_id, false)
+    TaskRepo.list()
   end
 end

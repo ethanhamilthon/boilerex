@@ -7,7 +7,8 @@ defmodule Boilerex.MixProject do
       version: "0.1.0",
       elixir: "~> 1.18",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      compilers: [:temple] ++ Mix.compilers()
     ]
   end
 
@@ -21,9 +22,11 @@ defmodule Boilerex.MixProject do
   defp deps do
     [
       {:plug_cowboy, "~> 2.6"},
-      {:exsync, "~> 0.4"},
-      {:temple, "~> 0.11.0"},
-      {:tailwind, "~> 0.3", only: :dev}
+      {:exsync, "~> 0.4", only: :dev},
+      {:temple, "~> 0.14"},
+      {:tailwind, "~> 0.3", only: :dev},
+      {:exqlite, "~> 0.17"},
+      {:html_entities, "~> 0.5"}
     ]
   end
 end

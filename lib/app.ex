@@ -1,5 +1,5 @@
 defmodule Boilerex.Application do
-  alias Core.Repo.TaskAgent
+  alias Core.Repo.Connection
   use Application
 
   @impl true
@@ -9,7 +9,7 @@ defmodule Boilerex.Application do
 
     children = [
       {Plug.Cowboy, scheme: :http, plug: Web.Router.Main, options: [port: port]},
-      TaskAgent
+      Connection
     ]
 
     opts = [strategy: :one_for_one, name: Boilerex.Supervisor]

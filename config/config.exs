@@ -12,4 +12,9 @@ config :tailwind,
   ]
 
 config :boilerex,
-  port: 4089
+  port: 4089,
+  db_path: "data.db"
+
+config :temple,
+  engine: EEx.SmartEngine,
+  attributes: {Temple, :attributes}

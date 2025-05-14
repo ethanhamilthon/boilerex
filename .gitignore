@@ -21,3 +21,7 @@ boilerex-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+data.db
+.elixir_ls
+just.exs

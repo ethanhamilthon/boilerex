@@ -7,7 +7,7 @@ defmodule Web.Views.Pages.Index do
   def index_page(assigns) do
     temple do
       c &Layouts.Main.main_layout/1, title: "Index Page" do
-        main class: "w-full flex flex-col gap-12 py-24 items-center" do
+        main class: "w-full flex flex-col gap-12 py-24 px-8 items-center" do
           h1 class: "text-4xl font-medium", do: "📝 Task Manager"
           c &Task.list/1, tasks: @tasks
 
@@ -22,6 +22,5 @@ defmodule Web.Views.Pages.Index do
         end
       end
     end
-    |> Enum.join("")
   end
 end

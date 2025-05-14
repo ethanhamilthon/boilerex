@@ -1,7 +1,6 @@
 defmodule Web.Router.Main do
   alias Core.Services.TaskService
   alias Web.Views.Components.Task
-  alias Core.Repo.TaskAgent
   alias Web.Views.Pages.Index
   use Plug.Router
   plug(Plug.Logger)
@@ -23,7 +22,7 @@ defmodule Web.Router.Main do
 
   get "/" do
     conn
-    |> send_resp(200, Index.index_page(%{tasks: TaskAgent.list()}))
+    |> send_resp(200, Index.index_page(tasks: TaskService.list()))
   end
 
   post "/" do
@@ -35,6 +34,20 @@ defmodule Web.Router.Main do
 
   delete "/:id" do
     tasks = conn.params["id"] |> TaskService.delete()
+
+    conn
+    |> send_resp(200, Task.list(tasks: tasks))
+  end
+
+  patch "/:id" do
+    tasks =
+      case conn.query_params do
+        %{"recover" => "true"} ->
+          conn.params["id"] |> TaskService.recover()
+
+        _ ->
+          conn.params["id"] |> TaskService.done()
+      end
 
     conn
     |> send_resp(200, Task.list(tasks: tasks))

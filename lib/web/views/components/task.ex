@@ -37,7 +37,11 @@ defmodule Web.Views.Components.Task do
           if len == 0 do
             "🔥 No tasks"
           else
-            "🔥 You have #{len} thing to do"
+            "🔥 You have #{len} #{if len > 1 do
+              "things"
+            else
+              "thing"
+            end} to do"
           end
         end
 
@@ -68,7 +72,7 @@ defmodule Web.Views.Components.Task do
             "px-6 w-full py-3 rounded-md border border-zinc-600 flex justify-between items-center ",
             "line-through text-zinc-500 border-zinc-800": @finish
           ] do
-        span class: "", do: @t.name
+        span class: "w-[90%]", do: @t.name
 
         div class: "flex gap-4 items-center" do
           if @finish do
@@ -112,7 +116,7 @@ defmodule Web.Views.Components.Task do
               type: "text",
               placeholder: "Title of the task",
               class:
-                "w-full px-6 py-3 placeholder:text-zinc-700 rounded-md border border-zinc-600 focus:outline-none"
+                "w-full px-6 pr-20 py-3 placeholder:text-zinc-700 rounded-md border border-zinc-600 focus:outline-none"
 
         button type: "submit",
                class:
